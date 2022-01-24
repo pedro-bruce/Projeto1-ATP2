@@ -3,8 +3,8 @@
 
 void openFiles(FILE **f1, FILE **f2, FILE **f3, FILE **f4);  //abre os arquivos
 void closeFiles(FILE *f1, FILE *f2, FILE *f3, FILE *f4); //fecha os arquivos
-void threshold(FILE *f1, FILE *f2); //trabalha com o arquivo de limiarização
-void negative(FILE *f1, FILE *f3);  //trabalha com o arquivo de negativação
+void threshold(FILE *f1, FILE *f2); //trabalha com o arquivo de limiarizaÃ§Ã£o
+void negative(FILE *f1, FILE *f3);  //trabalha com o arquivo de negativaÃ§Ã£o
 void histogram(FILE *f1, FILE *f4); //trabalha com o arquivo do histograma
 void firstLines(FILE *in, FILE*out);//percorre as primeiras linhas do arquivo 
 
@@ -21,10 +21,10 @@ int main(){
 }
 
 void openFiles(FILE **f1, FILE **f2, FILE **f3, FILE **f4){
-	*f1 = fopen("saturn.pgm", "r");      //abre a imagem que será trabalhada
-	*f2 = fopen("saturn_lim.pgm", "w");  //cria um arquivo de limiarização
-	*f3 = fopen("saturn_neg.pgm", "w");  //cria um arquivo de negativação
-	*f4 = fopen("saturn_hist.txt", "w"); //cria o histograma
+	*f1 = fopen("exemplo.pgm", "r");      //abre a imagem que serÃ¡ trabalhada
+	*f2 = fopen("exemplo_lim.pgm", "w");  //cria um arquivo de limiarizaÃ§Ã£o
+	*f3 = fopen("exemplo_neg.pgm", "w");  //cria um arquivo de negativaÃ§Ã£o
+	*f4 = fopen("exemplo_hist.txt", "w"); //cria o histograma
 	
 	if(*f1 == NULL || *f2 == NULL || *f3 == NULL || *f4 == NULL){
 		printf("Erro! Os arquivos nao foram abertos.");
@@ -38,7 +38,7 @@ void threshold(FILE *f1, FILE *f2){
 	int val;
 	
 	do{
-		fscanf(f1, "%d", &val); //lê o valor do tom
+		fscanf(f1, "%d", &val); //lÃª o valor do tom
 		
 		if(val<150)
 			val = 0;
@@ -57,7 +57,7 @@ void negative(FILE *f1, FILE *f3){
 	int val;
 	
 	do{
-		fscanf(f1, "%d", &val); //lê o valor do tom
+		fscanf(f1, "%d", &val); //lÃª o valor do tom
 		fprintf(f3, "%d ", 255-val); //printa 255 - o valor do tom
 	}while(!feof(f1));
 	
@@ -77,9 +77,9 @@ void histogram(FILE *f1, FILE *f4){
 	}
 	
 	do{
-		fscanf(f1, "%d", &val); //lê o tom de cinza
+		fscanf(f1, "%d", &val); //lÃª o tom de cinza
 		
-		hist[val]++; //incrementa na respectiva posição do tom
+		hist[val]++; //incrementa na respectiva posiÃ§Ã£o do tom
 	}while(!feof(f1));
 	
 	for(i=0;i<256;i++)
@@ -91,16 +91,16 @@ void histogram(FILE *f1, FILE *f4){
 void firstLines(FILE *in, FILE *out){
 	char c[3]; //dois caracteres e '\0'
 	
-	fscanf(in, "%s", c); //lê o tipo do arquivo
+	fscanf(in, "%s", c); //lÃª o tipo do arquivo
 	fprintf(out, "%s\n", c); //printa o tipo do arquivo
 	
 	int col, lin, max;
 	
-	fscanf(in, "%d %d", &col, &lin); //lê o número de colunas e linhas da imagem
-	fprintf(out, "%d %d\n", col, lin);//printa o número de colunas e linhas da imagem
+	fscanf(in, "%d %d", &col, &lin); //lÃª o nÃºmero de colunas e linhas da imagem
+	fprintf(out, "%d %d\n", col, lin);//printa o nÃºmero de colunas e linhas da imagem
 	
-	fscanf(in, "%d", &max); //lê o número máximo de tons de cinza
-	fprintf(out, "%d\n", max);//printa o número máximo de tons de cinza
+	fscanf(in, "%d", &max); //lÃª o nÃºmero mÃ¡ximo de tons de cinza
+	fprintf(out, "%d\n", max);//printa o nÃºmero mÃ¡ximo de tons de cinza
 }
 
 void closeFiles(FILE *f1, FILE *f2, FILE *f3, FILE *f4){
